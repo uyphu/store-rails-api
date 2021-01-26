@@ -1,16 +1,27 @@
+# Store Rails API Sample [![PRs Welcome](https://img.shields.io/badge/PRs-welcome-green.svg)](https://github.com/facebook/create-react-app/blob/master/CONTRIBUTING.md)
+An application to build REST API service with Rails
+
 ## Requirement:
 	+ Mysql
 	+ Ruby at least 2.0
 
-1. Install Ruby
+### 1. Install Ruby
 	https://rubyinstaller.org/
-2. Install Rails
+### 2. Install Rails
+```bash
 	gem install rails
-3. Create Rails application with mode api
+```
+	
+### 3. Create Rails application with mode api
+```bash
 	rails new store-rails-api --api --database=mysql
 	cd store-rails-api --api
-4. Create a Author model
+```
+### 4. Create a Author model
+```bash
 	rails generate model author name:string address:string
+```
+	
 	
 	NOTE: typ of model :primary_key, :string, :text, :integer, :float, :decimal, :datetime, :timestamp,
 :time, :date, :binary, :boolean, :references
@@ -22,8 +33,10 @@
       invoke    test_unit
       create      test/models/author_test.rb
       create      test/fixtures/authors.yml
-5. Create a Book model belongs to Author, One Author has many Books
+### 5. Create a Book model belongs to Author, One Author has many Books
+	```bash
 	rails generate model book title:string year:string rating:integer price:decimal author:references
+	```
 	
 	It will generate:
 	  invoke  active_record
@@ -32,12 +45,15 @@
       invoke    test_unit
       create      test/models/book_test.rb
       create      test/fixtures/books.yml
-6. Update database connection to Mysql
+### 6. Update database connection to Mysql
 	Create database name: store_rails_api_development
 	Go to config/database.yml, update user/pass to connect mysql
-7. Run migrate database to create tables in mysql
+### 7. Run migrate database to create tables in mysql
+```bash
 	rails db:migrate
-8. Update relationship between Book model and Author Model
+```
+	
+### 8. Update relationship between Book model and Author Model
 	In app/models/book.rb
 		add "belongs_to :author"
 	In app/models/author.rb
@@ -65,8 +81,14 @@
 	author_02.books.create!(title: 'Book author_02 03', year: 2020, rating: 4, price: 102)
 	author_02.books.create!(title: 'Book author_02 04', year: 2021, rating: 3, price: 103)
 	
-	rails db:seed
-9. Create author controller
+	
+```bash
+rails db:seed
+```
+### 9. Create author controller
+```bash
+rails generate scaffold_controller api/v1/author
+```
 	rails generate scaffold_controller api/v1/author 
 	create  app/controllers/api/v1/authors_controller.rb
       invoke  resource_route
@@ -77,8 +99,11 @@
 		end
       invoke  test_unit
       create    test/controllers/api/v1/authors_controller_test.rb
-10. Create book controller 
-	rails generate scaffold_controller api/v1/book
+### 10. Create book controller 
+```bash
+rails generate scaffold_controller api/v1/book
+```
+	
 	create  app/controllers/api/v1/books_controller.rb
       invoke  resource_route
        route    namespace :api do
@@ -88,21 +113,30 @@
 		end
       invoke  test_unit
       create    test/controllers/api/v1/books_controller_test.rb
-11. Setup swagger
+### 11. Setup swagger
 	11.1 Add rswag and rspec-rails gems to Gemfile
 		group :development, :test do
 		  gem 'rspec-rails', '~> 3.5'
 		end
 		gem 'rswag'
 	11.2 Install with bundler
-		bundle install
+```bash
+bundle install
+```
+		
 	11.3 Run generator
-		rails generate rspec:install
+```bash
+rails generate rspec:install
+```
+		
 		  create  .rspec
 		  create  spec
 		  create  spec/spec_helper.rb
 		  create  spec/rails_helper.rb
-		rails g rswag:install
+```bash
+	rails g rswag:install
+```
+		
 			generate  rswag:specs:install
 			   rails  generate rswag:specs:install
 			  create  spec/swagger_helper.rb
@@ -148,13 +182,19 @@
 	spec/integration/book_spec.rb
 	
 	10.5 Generate swagger file
-		rake rswag:specs:swaggerize
-12. Run application
+```bash
+	rake rswag:specs:swaggerize
+```
+		
+### 12. Run application
+```bash
 	bundle install
 	rails server
+```
 	
-13. Open browser with http://localhost:3000/api-docs
+	
+### 13. Open browser with http://localhost:3000/api-docs
 
-14. API flow
+### 14. API flow
 
 	User request -> routes.rb -> ...controller.rb -> model -> integrate database 
