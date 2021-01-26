@@ -1,0 +1,337 @@
+---
+openapi: 3.0.1
+info:
+  title: API V1
+  version: v1
+paths:
+  "/api/v1/authors":
+    post:
+      summary: Creates a author
+      tags:
+      - Authors
+      parameters: []
+      responses:
+        '201':
+          description: author created
+          content: {}
+        '422':
+          description: invalid request
+          content: {}
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                name:
+                  type: string
+                address:
+                  type: string
+              required:
+              - name
+              - address
+          application/xml:
+            schema:
+              type: object
+              properties:
+                name:
+                  type: string
+                address:
+                  type: string
+              required:
+              - name
+              - address
+  "/api/v1/authors/search":
+    get:
+      summary: Retrieves a author
+      tags:
+      - Authors
+      parameters:
+      - name: title
+        in: query
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: name found
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  id:
+                    type: integer
+                  name:
+                    type: string
+                  address:
+                    type: string
+                required:
+                - id
+                - name
+                - address
+            application/xml:
+              schema:
+                type: object
+                properties:
+                  id:
+                    type: integer
+                  name:
+                    type: string
+                  address:
+                    type: string
+                required:
+                - id
+                - name
+                - address
+        '404':
+          description: author not found
+          content: {}
+  "/api/v1/authors/{id}":
+    get:
+      summary: Retrieves a author
+      tags:
+      - Authors
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: name found
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  id:
+                    type: integer
+                  name:
+                    type: string
+                  address:
+                    type: string
+                required:
+                - id
+                - name
+                - address
+            application/xml:
+              schema:
+                type: object
+                properties:
+                  id:
+                    type: integer
+                  name:
+                    type: string
+                  address:
+                    type: string
+                required:
+                - id
+                - name
+                - address
+        '404':
+          description: author not found
+          content: {}
+    delete:
+      summary: Deletes a author
+      tags:
+      - Authors
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: name found
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  id:
+                    type: integer
+                  name:
+                    type: string
+                  address:
+                    type: string
+                required:
+                - id
+                - name
+                - address
+            application/xml:
+              schema:
+                type: object
+                properties:
+                  id:
+                    type: integer
+                  name:
+                    type: string
+                  address:
+                    type: string
+                required:
+                - id
+                - name
+                - address
+        '404':
+          description: author not found
+          content: {}
+  "/api/v1/books":
+    post:
+      summary: Creates a book
+      tags:
+      - Books
+      parameters: []
+      responses:
+        '201':
+          description: book created
+          content: {}
+        '422':
+          description: invalid request
+          content: {}
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                title:
+                  type: string
+                year:
+                  type: integer
+                rating:
+                  type: integer
+                price:
+                  type: number
+              required:
+              - title
+              - year
+          application/xml:
+            schema:
+              type: object
+              properties:
+                title:
+                  type: string
+                year:
+                  type: integer
+                rating:
+                  type: integer
+                price:
+                  type: number
+              required:
+              - title
+              - year
+  "/api/v1/books/{id}":
+    get:
+      summary: Retrieves a book
+      tags:
+      - Books
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: name found
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  id:
+                    type: integer
+                  title:
+                    type: string
+                  year:
+                    type: integer
+                  rating:
+                    type: integer
+                  price:
+                    type: number
+                required:
+                - id
+                - title
+                - year
+            application/xml:
+              schema:
+                type: object
+                properties:
+                  id:
+                    type: integer
+                  title:
+                    type: string
+                  year:
+                    type: integer
+                  rating:
+                    type: integer
+                  price:
+                    type: number
+                required:
+                - id
+                - title
+                - year
+        '404':
+          description: book not found
+          content: {}
+    delete:
+      summary: Deletes a book
+      tags:
+      - Books
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: name found
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  id:
+                    type: integer
+                  title:
+                    type: string
+                  year:
+                    type: integer
+                  rating:
+                    type: integer
+                  price:
+                    type: number
+                required:
+                - id
+                - title
+                - year
+            application/xml:
+              schema:
+                type: object
+                properties:
+                  id:
+                    type: integer
+                  title:
+                    type: string
+                  year:
+                    type: integer
+                  rating:
+                    type: integer
+                  price:
+                    type: number
+                required:
+                - id
+                - title
+                - year
+        '404':
+          description: book not found
+          content: {}
+servers:
+- url: http://{defaultHost}
+  variables:
+    defaultHost:
+      default: localhost:3000
